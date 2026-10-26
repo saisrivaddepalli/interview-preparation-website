@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operating Systems Practice - InterviewPrep</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">InterviewPrep</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="aptitude.html">Aptitude</a>
+        <a href="technical.html">Technical</a>
+        <a href="hr.html">HR Questions</a>
+        <a href="mocktest.html">Mock Test</a>
+    </nav>
+</header>
+
+<section class="test-section">
+
+    <h2>Operating Systems Practice Test</h2>
+
+    <div class="test-box">
+
+        <p id="os-number">Question 1 of 5</p>
+
+        <h3 id="os-question"></h3>
+
+        <div id="os-options"></div>
+
+        <button id="os-next" onclick="nextOSQuestion()">
+            Next
+        </button>
+
+        <p id="os-result"></p>
+<button id="os-restart" onclick="restartOSTest()" style="display:none;">
+    Restart Test
+</button>
+    </div>
+
+</section>
+
+<script>
+
+const osQuestions = [
+    {
+        question: "What is the main function of an operating system?",
+        options: [
+            "Manage computer resources",
+            "Create websites",
+            "Design databases",
+            "Write programs"
+        ],
+        answer: "Manage computer resources"
+    },
+
+    {
+        question: "Which of the following is an example of an operating system?",
+        options: ["Java", "Windows", "MySQL", "HTML"],
+        answer: "Windows"
+    },
+
+    {
+        question: "Which component manages processes in an operating system?",
+        options: [
+            "Process Scheduler",
+            "Compiler",
+            "Web Browser",
+            "Database"
+        ],
+        answer: "Process Scheduler"
+    },
+
+    {
+        question: "Which memory is directly accessible by the CPU?",
+        options: ["RAM", "Hard Disk", "DVD", "USB Drive"],
+        answer: "RAM"
+    },
+
+    {
+        question: "Which scheduling algorithm executes processes in the order they arrive?",
+        options: [
+            "Round Robin",
+            "Shortest Job First",
+            "FCFS",
+            "Priority Scheduling"
+        ],
+        answer: "FCFS"
+    }
+];
+
+let osCurrent = 0;
+let osScore = 0;
+let osAnswered = false;
+
+function loadOSQuestion() {
+
+    const question = osQuestions[osCurrent];
+
+    document.getElementById("os-number").textContent =
+        "Question " + (osCurrent + 1) +
+        " of " + osQuestions.length;
+
+    document.getElementById("os-question").textContent =
+        question.question;
+
+    const options =
+        document.getElementById("os-options");
+
+    options.innerHTML = "";
+
+    osAnswered = false;
+
+    question.options.forEach(function(option) {
+
+        const button = document.createElement("button");
+
+        button.textContent = option;
+        button.className = "option";
+
+        button.onclick = function() {
+
+            if (!osAnswered) {
+
+                osAnswered = true;
+
+                if (option === question.answer) {
+                    osScore++;
+                }
+
+                document
+                    .querySelectorAll("#os-options .option")
+                    .forEach(function(btn) {
+                        btn.disabled = true;
+                    });
+            }
+        };
+
+        options.appendChild(button);
+    });
+}
+
+function nextOSQuestion() {
+
+    if (!osAnswered) {
+        alert("Please select an answer first.");
+        return;
+    }
+
+    if (osCurrent < osQuestions.length - 1) {
+
+        osCurrent++;
+
+        loadOSQuestion();
+
+    } else {
+
+        document.getElementById("os-number").textContent = "";
+
+        document.getElementById("os-question").textContent =
+            "Test Completed!";
+
+        document.getElementById("os-options").innerHTML = "";
+
+        document.getElementById("os-next").style.display =
+            "none";
+            document.getElementById("os-restart").style.display =
+    "inline-block";
+
+        document.getElementById("os-result").textContent =
+            "Your Score: " + osScore +
+            " / " + osQuestions.length;
+    }
+}
+
+loadOSQuestion();
+
+function restartOSTest() {
+
+    osCurrent = 0;
+    osScore = 0;
+    osAnswered = false;
+
+    document.getElementById("os-next").style.display =
+        "inline-block";
+
+    document.getElementById("os-restart").style.display =
+        "none";
+
+    document.getElementById("os-result").textContent = "";
+
+    loadOSQuestion();
+}
+
+</script>
+
+</body>
+</html>

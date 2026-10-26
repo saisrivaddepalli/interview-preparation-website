@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Practice - InterviewPrep</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">InterviewPrep</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="aptitude.html">Aptitude</a>
+        <a href="technical.html">Technical</a>
+        <a href="hr.html">HR Questions</a>
+        <a href="mocktest.html">Mock Test</a>
+    </nav>
+</header>
+
+<section class="test-section">
+
+    <h2>Python Practice Test</h2>
+
+    <div class="test-box">
+
+        <p id="python-number">Question 1 of 5</p>
+
+        <h3 id="python-question"></h3>
+
+        <div id="python-options"></div>
+
+        <button id="python-next" onclick="nextPythonQuestion()">
+            Next
+        </button>
+
+        <p id="python-result"></p>
+        <button id="python-restart" onclick="restartPythonTest()" style="display:none;">
+    Restart Test
+</button>
+
+    </div>
+
+</section>
+
+<script>
+
+const pythonQuestions = [
+    {
+        question: "Which keyword is used to define a function in Python?",
+        options: ["func", "def", "function", "define"],
+        answer: "def"
+    },
+
+    {
+        question: "Which symbol is used for comments in Python?",
+        options: ["//", "#", "/*", "--"],
+        answer: "#"
+    },
+
+    {
+        question: "Which data type stores multiple values in an ordered collection?",
+        options: ["List", "Integer", "Boolean", "Float"],
+        answer: "List"
+    },
+
+    {
+        question: "Which function is used to display output in Python?",
+        options: ["display()", "show()", "print()", "output()"],
+        answer: "print()"
+    },
+
+    {
+        question: "Which keyword is used to create a class in Python?",
+        options: ["class", "Class", "object", "define"],
+        answer: "class"
+    }
+];
+
+let pythonCurrent = 0;
+let pythonScore = 0;
+let pythonAnswered = false;
+
+function loadPythonQuestion() {
+
+    const question = pythonQuestions[pythonCurrent];
+
+    document.getElementById("python-number").textContent =
+        "Question " + (pythonCurrent + 1) +
+        " of " + pythonQuestions.length;
+
+    document.getElementById("python-question").textContent =
+        question.question;
+
+    const options =
+        document.getElementById("python-options");
+
+    options.innerHTML = "";
+
+    pythonAnswered = false;
+
+    question.options.forEach(function(option) {
+
+        const button = document.createElement("button");
+
+        button.textContent = option;
+        button.className = "option";
+
+        button.onclick = function() {
+
+            if (!pythonAnswered) {
+
+                pythonAnswered = true;
+
+                if (option === question.answer) {
+                    pythonScore++;
+                }
+
+                document
+                    .querySelectorAll("#python-options .option")
+                    .forEach(function(btn) {
+                        btn.disabled = true;
+                    });
+            }
+        };
+
+        options.appendChild(button);
+    });
+}
+
+function nextPythonQuestion() {
+
+    if (!pythonAnswered) {
+        alert("Please select an answer first.");
+        return;
+    }
+
+    if (pythonCurrent < pythonQuestions.length - 1) {
+
+        pythonCurrent++;
+
+        loadPythonQuestion();
+
+    } else {
+
+        document.getElementById("python-number").textContent = "";
+
+        document.getElementById("python-question").textContent =
+            "Test Completed!";
+
+        document.getElementById("python-options").innerHTML = "";
+
+        document.getElementById("python-next").style.display =
+            "none";
+            document.getElementById("python-restart").style.display =
+    "inline-block";
+
+        document.getElementById("python-result").textContent =
+            "Your Score: " + pythonScore +
+            " / " + pythonQuestions.length;
+    }
+}
+loadPythonQuestion();
+
+function restartPythonTest() {
+
+    pythonCurrent = 0;
+    pythonScore = 0;
+    pythonAnswered = false;
+
+    document.getElementById("python-next").style.display =
+        "inline-block";
+
+    document.getElementById("python-restart").style.display =
+        "none";
+
+    document.getElementById("python-result").textContent = "";
+
+    loadPythonQuestion();
+}
+
+</script>
+
+
+</body>
+</html>

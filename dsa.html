@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structures Practice - InterviewPrep</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">InterviewPrep</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="aptitude.html">Aptitude</a>
+        <a href="technical.html">Technical</a>
+        <a href="hr.html">HR Questions</a>
+        <a href="mocktest.html">Mock Test</a>
+    </nav>
+</header>
+
+<section class="test-section">
+
+    <h2>Data Structures Practice Test</h2>
+
+    <div class="test-box">
+
+        <p id="dsa-number">Question 1 of 5</p>
+
+        <h3 id="dsa-question"></h3>
+
+        <div id="dsa-options"></div>
+
+        <button id="dsa-next" onclick="nextDSAQuestion()">
+            Next
+        </button>
+
+        <p id="dsa-result"></p>
+        <button id="dsa-restart" onclick="restartDSATest()" style="display:none;">
+    Restart Test
+</button>
+
+    </div>
+
+</section>
+
+<script>
+
+const dsaQuestions = [
+    {
+        question: "Which data structure follows LIFO?",
+        options: ["Queue", "Stack", "Array", "Tree"],
+        answer: "Stack"
+    },
+
+    {
+        question: "Which data structure follows FIFO?",
+        options: ["Stack", "Queue", "Tree", "Graph"],
+        answer: "Queue"
+    },
+
+    {
+        question: "Which data structure is used for hierarchical data?",
+        options: ["Array", "Stack", "Tree", "Queue"],
+        answer: "Tree"
+    },
+
+    {
+        question: "What is the time complexity of binary search on a sorted array?",
+        options: ["O(n)", "O(log n)", "O(n²)", "O(1)"],
+        answer: "O(log n)"
+    },
+
+    {
+        question: "Which traversal visits the root between the left and right subtrees?",
+        options: ["Preorder", "Inorder", "Postorder", "Level order"],
+        answer: "Inorder"
+    }
+];
+
+let dsaCurrent = 0;
+let dsaScore = 0;
+let dsaAnswered = false;
+
+function loadDSAQuestion() {
+
+    const question = dsaQuestions[dsaCurrent];
+
+    document.getElementById("dsa-number").textContent =
+        "Question " + (dsaCurrent + 1) +
+        " of " + dsaQuestions.length;
+
+    document.getElementById("dsa-question").textContent =
+        question.question;
+
+    const options =
+        document.getElementById("dsa-options");
+
+    options.innerHTML = "";
+
+    dsaAnswered = false;
+
+    question.options.forEach(function(option) {
+
+        const button = document.createElement("button");
+
+        button.textContent = option;
+        button.className = "option";
+
+        button.onclick = function() {
+
+            if (!dsaAnswered) {
+
+                dsaAnswered = true;
+
+                if (option === question.answer) {
+                    dsaScore++;
+                }
+
+                document
+                    .querySelectorAll("#dsa-options .option")
+                    .forEach(function(btn) {
+                        btn.disabled = true;
+                    });
+            }
+        };
+
+        options.appendChild(button);
+    });
+}
+
+function nextDSAQuestion() {
+
+    if (!dsaAnswered) {
+        alert("Please select an answer first.");
+        return;
+    }
+
+    if (dsaCurrent < dsaQuestions.length - 1) {
+
+        dsaCurrent++;
+
+        loadDSAQuestion();
+
+    } else {
+
+        document.getElementById("dsa-number").textContent = "";
+
+        document.getElementById("dsa-question").textContent =
+            "Test Completed!";
+
+        document.getElementById("dsa-options").innerHTML = "";
+
+        document.getElementById("dsa-next").style.display =
+            "none";
+            document.getElementById("dsa-restart").style.display =
+    "inline-block";
+
+        document.getElementById("dsa-result").textContent =
+            "Your Score: " + dsaScore +
+            " / " + dsaQuestions.length;
+    }
+}
+loadDSAQuestion();
+
+function restartDSATest() {
+
+    dsaCurrent = 0;
+    dsaScore = 0;
+    dsaAnswered = false;
+
+    document.getElementById("dsa-next").style.display =
+        "inline-block";
+
+    document.getElementById("dsa-restart").style.display =
+        "none";
+
+    document.getElementById("dsa-result").textContent = "";
+
+    loadDSAQuestion();
+}
+
+</script>
+
+</body>
+</html>

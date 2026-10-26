@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Practice - InterviewPrep</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">InterviewPrep</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="aptitude.html">Aptitude</a>
+        <a href="technical.html">Technical</a>
+        <a href="hr.html">HR Questions</a>
+        <a href="mocktest.html">Mock Test</a>
+    </nav>
+</header>
+
+<section class="test-section">
+
+    <h2>Java Practice Test</h2>
+
+    <div class="test-box">
+
+        <p id="java-number">Question 1 of 5</p>
+
+        <h3 id="java-question"></h3>
+
+        <div id="java-options"></div>
+
+        <button id="java-next" onclick="nextJavaQuestion()">
+            Next
+        </button>
+
+        <p id="java-result"></p>
+
+        <button id="java-restart" onclick="restartJavaTest()" style="display:none;">
+            Restart Test
+        </button>
+
+    </div>
+
+</section>
+
+<script>
+
+const javaQuestions = [
+    {
+        question: "Which keyword is used to create a class in Java?",
+        options: ["class", "Class", "new", "object"],
+        answer: "class"
+    },
+
+    {
+        question: "Which method is the starting point of a Java program?",
+        options: ["start()", "main()", "run()", "execute()"],
+        answer: "main()"
+    },
+
+    {
+        question: "Which concept allows one class to acquire properties of another class?",
+        options: ["Encapsulation", "Inheritance", "Polymorphism", "Abstraction"],
+        answer: "Inheritance"
+    },
+
+    {
+        question: "Which keyword is used to inherit a class in Java?",
+        options: ["inherits", "extends", "implements", "super"],
+        answer: "extends"
+    },
+
+    {
+        question: "Which of these is NOT a Java primitive data type?",
+        options: ["int", "float", "String", "char"],
+        answer: "String"
+    }
+];
+
+let javaCurrent = 0;
+let javaScore = 0;
+let javaAnswered = false;
+
+function loadJavaQuestion() {
+
+    const question = javaQuestions[javaCurrent];
+
+    document.getElementById("java-number").textContent =
+        "Question " + (javaCurrent + 1) +
+        " of " + javaQuestions.length;
+
+    document.getElementById("java-question").textContent =
+        question.question;
+
+    const options =
+        document.getElementById("java-options");
+
+    options.innerHTML = "";
+
+    javaAnswered = false;
+
+    question.options.forEach(function(option) {
+
+        const button = document.createElement("button");
+
+        button.textContent = option;
+        button.className = "option";
+
+        button.onclick = function() {
+
+            if (!javaAnswered) {
+
+                javaAnswered = true;
+
+                if (option === question.answer) {
+                    javaScore++;
+                }
+
+                document
+                    .querySelectorAll("#java-options .option")
+                    .forEach(function(btn) {
+                        btn.disabled = true;
+                    });
+            }
+        };
+
+        options.appendChild(button);
+    });
+}
+
+function nextJavaQuestion() {
+
+    if (!javaAnswered) {
+
+        alert("Please select an answer first.");
+
+        return;
+    }
+
+    if (javaCurrent < javaQuestions.length - 1) {
+
+        javaCurrent++;
+
+        loadJavaQuestion();
+
+    } else {
+
+        document.getElementById("java-number").textContent = "";
+
+        document.getElementById("java-question").textContent =
+            "Test Completed!";
+
+        document.getElementById("java-options").innerHTML = "";
+
+        document.getElementById("java-next").style.display =
+            "none";
+
+        document.getElementById("java-restart").style.display =
+            "inline-block";
+
+        document.getElementById("java-result").textContent =
+            "Your Score: " + javaScore +
+            " / " + javaQuestions.length;
+    }
+}
+
+function restartJavaTest() {
+
+    javaCurrent = 0;
+    javaScore = 0;
+    javaAnswered = false;
+
+    document.getElementById("java-next").style.display =
+        "inline-block";
+
+    document.getElementById("java-restart").style.display =
+        "none";
+
+    document.getElementById("java-result").textContent = "";
+
+    loadJavaQuestion();
+}
+
+loadJavaQuestion();
+
+</script>
+
+</body>
+</html>

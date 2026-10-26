@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DBMS Practice - InterviewPrep</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">InterviewPrep</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="aptitude.html">Aptitude</a>
+        <a href="technical.html">Technical</a>
+        <a href="hr.html">HR Questions</a>
+        <a href="mocktest.html">Mock Test</a>
+    </nav>
+</header>
+
+<section class="test-section">
+
+    <h2>DBMS Practice Test</h2>
+
+    <div class="test-box">
+
+        <p id="dbms-number">Question 1 of 5</p>
+
+        <h3 id="dbms-question"></h3>
+
+        <div id="dbms-options"></div>
+
+        <button id="dbms-next" onclick="nextDBMSQuestion()">
+            Next
+        </button>
+
+        <p id="dbms-result"></p>
+        <button id="dbms-restart" onclick="restartDBMSTest()" style="display:none;">
+    Restart Test
+</button>
+
+    </div>
+
+</section>
+
+<script>
+
+const dbmsQuestions = [
+    {
+        question: "What does DBMS stand for?",
+        options: [
+            "Database Management System",
+            "Data Backup Management System",
+            "Database Machine System",
+            "Data Base Memory System"
+        ],
+        answer: "Database Management System"
+    },
+
+    {
+        question: "Which language is commonly used to interact with a database?",
+        options: ["HTML", "SQL", "CSS", "XML"],
+        answer: "SQL"
+    },
+
+    {
+        question: "Which key uniquely identifies each record in a table?",
+        options: ["Foreign Key", "Primary Key", "Candidate Key", "Super Key"],
+        answer: "Primary Key"
+    },
+
+    {
+        question: "Which command is used to retrieve data from a database?",
+        options: ["INSERT", "UPDATE", "SELECT", "DELETE"],
+        answer: "SELECT"
+    },
+
+    {
+        question: "Which property of a transaction ensures all operations are completed or none are?",
+        options: ["Consistency", "Isolation", "Atomicity", "Durability"],
+        answer: "Atomicity"
+    }
+];
+
+let dbmsCurrent = 0;
+let dbmsScore = 0;
+let dbmsAnswered = false;
+
+function loadDBMSQuestion() {
+
+    const question = dbmsQuestions[dbmsCurrent];
+
+    document.getElementById("dbms-number").textContent =
+        "Question " + (dbmsCurrent + 1) +
+        " of " + dbmsQuestions.length;
+
+    document.getElementById("dbms-question").textContent =
+        question.question;
+
+    const options =
+        document.getElementById("dbms-options");
+
+    options.innerHTML = "";
+
+    dbmsAnswered = false;
+
+    question.options.forEach(function(option) {
+
+        const button = document.createElement("button");
+
+        button.textContent = option;
+        button.className = "option";
+
+        button.onclick = function() {
+
+            if (!dbmsAnswered) {
+
+                dbmsAnswered = true;
+
+                if (option === question.answer) {
+                    dbmsScore++;
+                }
+
+                document
+                    .querySelectorAll("#dbms-options .option")
+                    .forEach(function(btn) {
+                        btn.disabled = true;
+                    });
+            }
+        };
+
+        options.appendChild(button);
+    });
+}
+
+function nextDBMSQuestion() {
+
+    if (!dbmsAnswered) {
+        alert("Please select an answer first.");
+        return;
+    }
+
+    if (dbmsCurrent < dbmsQuestions.length - 1) {
+
+        dbmsCurrent++;
+
+        loadDBMSQuestion();
+
+    } else {
+
+        document.getElementById("dbms-number").textContent = "";
+
+        document.getElementById("dbms-question").textContent =
+            "Test Completed!";
+
+        document.getElementById("dbms-options").innerHTML = "";
+
+        document.getElementById("dbms-next").style.display =
+            "none";
+            document.getElementById("dbms-restart").style.display =
+    "inline-block";
+
+        document.getElementById("dbms-result").textContent =
+            "Your Score: " + dbmsScore +
+            " / " + dbmsQuestions.length;
+    }
+}
+
+loadDBMSQuestion();
+
+function restartDBMSTest() {
+
+    dbmsCurrent = 0;
+    dbmsScore = 0;
+    dbmsAnswered = false;
+
+    document.getElementById("dbms-next").style.display =
+        "inline-block";
+
+    document.getElementById("dbms-restart").style.display =
+        "none";
+
+    document.getElementById("dbms-result").textContent = "";
+
+    loadDBMSQuestion();
+}
+
+</script>
+</body>
+</html>

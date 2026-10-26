@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aptitude Practice - InterviewPrep</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">InterviewPrep</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="aptitude.html">Aptitude</a>
+        <a href="technical.html">Technical</a>
+        <a href="hr.html">HR Questions</a>
+        <a href="mocktest.html">Mock Test</a>
+    </nav>
+</header>
+
+<section class="test-section">
+
+    <h2>Aptitude Practice Test</h2>
+
+    <div class="test-box">
+
+        <p id="aptitude-number"></p>
+
+        <h3 id="aptitude-question"></h3>
+
+        <div id="aptitude-options"></div>
+
+        <button id="aptitude-next" onclick="nextAptitudeQuestion()">
+    Next
+</button>
+
+<p id="aptitude-result"></p>
+
+<button id="aptitude-restart"
+        onclick="restartAptitudeTest()"
+        style="display: none;">
+    Restart Test
+</button>
+
+        <button id="aptitude-restart" onclick="restartAptitudeTest()" style="display: none;">
+    Restart Test
+</button>
+
+    </div>
+
+</section>
+
+<script src="script.js"></script>
+
+</body>
+</html>

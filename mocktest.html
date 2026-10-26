@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock Interview - InterviewPrep</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">InterviewPrep</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="aptitude.html">Aptitude</a>
+        <a href="technical.html">Technical</a>
+        <a href="hr.html">HR Questions</a>
+        <a href="mocktest.html">Mock Test</a>
+    </nav>
+</header>
+
+<section class="test-section">
+
+    <h2>Mock Interview Test</h2>
+
+    <p class="page-description">
+        Test your aptitude, technical and interview knowledge.
+    </p>
+
+    <div class="test-box">
+
+        <p id="mock-number">Question 1 of 10</p>
+
+        <h3 id="mock-question"></h3>
+
+        <div id="mock-options"></div>
+
+        <button id="mock-next" onclick="nextMockQuestion()">
+            Next
+        </button>
+
+        <p id="mock-result"></p>
+        <button id="mock-restart" onclick="restartMockTest()" style="display:none;">
+    Restart Test
+</button>
+
+    </div>
+
+</section>
+
+<script>
+
+const mockQuestions = [
+
+    {
+        question: "What is 25% of 200?",
+        options: ["25", "40", "50", "75"],
+        answer: "50"
+    },
+
+    {
+        question: "Which keyword is used to inherit a class in Java?",
+        options: ["extends", "inherits", "implements", "super"],
+        answer: "extends"
+    },
+
+    {
+        question: "Which data structure follows LIFO?",
+        options: ["Queue", "Stack", "Tree", "Graph"],
+        answer: "Stack"
+    },
+
+    {
+        question: "Which command retrieves data from a database?",
+        options: ["INSERT", "SELECT", "UPDATE", "DELETE"],
+        answer: "SELECT"
+    },
+
+    {
+        question: "Which keyword defines a function in Python?",
+        options: ["function", "def", "fun", "define"],
+        answer: "def"
+    },
+
+    {
+        question: "What is the main function of an operating system?",
+        options: [
+            "Manage computer resources",
+            "Create websites",
+            "Write Java programs",
+            "Design databases"
+        ],
+        answer: "Manage computer resources"
+    },
+
+    {
+        question: "Which key uniquely identifies a record in a database?",
+        options: [
+            "Foreign Key",
+            "Primary Key",
+            "Duplicate Key",
+            "Normal Key"
+        ],
+        answer: "Primary Key"
+    },
+
+    {
+        question: "Which method is the starting point of a Java program?",
+        options: ["start()", "main()", "run()", "execute()"],
+        answer: "main()"
+    },
+
+    {
+        question: "What is your main goal during an interview?",
+        options: [
+            "Show your skills and suitability for the role",
+            "Avoid answering questions",
+            "Speak continuously",
+            "Memorize every possible question"
+        ],
+        answer: "Show your skills and suitability for the role"
+    },
+
+    {
+        question: "Which traversal visits the root between the left and right subtrees?",
+        options: ["Preorder", "Inorder", "Postorder", "Level order"],
+        answer: "Inorder"
+    }
+
+];
+
+let mockCurrent = 0;
+let mockScore = 0;
+let mockAnswered = false;
+
+function loadMockQuestion() {
+
+    const question = mockQuestions[mockCurrent];
+
+    document.getElementById("mock-number").textContent =
+        "Question " + (mockCurrent + 1) +
+        " of " + mockQuestions.length;
+
+    document.getElementById("mock-question").textContent =
+        question.question;
+
+    const options =
+        document.getElementById("mock-options");
+
+    options.innerHTML = "";
+
+    mockAnswered = false;
+
+    question.options.forEach(function(option) {
+
+        const button = document.createElement("button");
+
+        button.textContent = option;
+        button.className = "option";
+
+        button.onclick = function() {
+
+            if (!mockAnswered) {
+
+                mockAnswered = true;
+
+                if (option === question.answer) {
+                    mockScore++;
+                }
+
+                document
+                    .querySelectorAll("#mock-options .option")
+                    .forEach(function(btn) {
+                        btn.disabled = true;
+                    });
+            }
+        };
+
+        options.appendChild(button);
+    });
+}
+
+function nextMockQuestion() {
+
+    if (!mockAnswered) {
+
+        alert("Please select an answer first.");
+
+        return;
+    }
+
+    if (mockCurrent < mockQuestions.length - 1) {
+
+        mockCurrent++;
+
+        loadMockQuestion();
+
+    } else {
+
+        document.getElementById("mock-number").textContent = "";
+
+        document.getElementById("mock-question").textContent =
+            "Mock Test Completed!";
+
+        document.getElementById("mock-options").innerHTML = "";
+
+        document.getElementById("mock-next").style.display =
+            "none";
+            document.getElementById("mock-restart").style.display =
+    "inline-block";
+
+        document.getElementById("mock-result").textContent =
+            "Your Final Score: " + mockScore +
+            " / " + mockQuestions.length;
+    }
+}
+
+loadMockQuestion();
+
+function restartMockTest() {
+
+    mockCurrent = 0;
+    mockScore = 0;
+    mockAnswered = false;
+
+    document.getElementById("mock-next").style.display =
+        "inline-block";
+
+    document.getElementById("mock-restart").style.display =
+        "none";
+
+    document.getElementById("mock-result").textContent = "";
+
+    loadMockQuestion();
+}
+
+</script>
+
+</body>
+</html>

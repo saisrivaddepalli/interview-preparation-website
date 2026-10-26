@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Interview Questions - InterviewPrep</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">InterviewPrep</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="aptitude.html">Aptitude</a>
+        <a href="technical.html">Technical</a>
+        <a href="hr.html">HR Questions</a>
+        <a href="mocktest.html">Mock Test</a>
+    </nav>
+</header>
+
+<section class="features">
+
+    <h2>HR Interview Questions</h2>
+
+    <p class="page-description">
+        Practice common HR interview questions and learn how to
+        structure clear and confident answers.
+    </p>
+
+    <div class="feature-container">
+
+        <div class="card">
+            <h3>1. Tell me about yourself</h3>
+            <p>
+                Give a short introduction about your education,
+                skills, interests and career goals.
+            </p>
+
+            <button onclick="showAnswer('answer1')">
+                View Answer
+            </button>
+
+            <p id="answer1" style="display:none;">
+                Example: I am a B.Tech student interested in
+                technology and software development. I enjoy
+                learning programming and improving my problem-solving
+                skills. I am currently developing my technical and
+                communication skills for a career in the software field.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>2. What are your strengths?</h3>
+
+            <p>
+                Mention genuine qualities that help you in studies
+                or work.
+            </p>
+
+            <button onclick="showAnswer('answer2')">
+                View Answer
+            </button>
+
+            <p id="answer2" style="display:none;">
+                Example: My strengths are willingness to learn,
+                problem-solving, consistency and the ability to
+                work well with others.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>3. What is your weakness?</h3>
+
+            <p>
+                Mention a real area you are improving and explain
+                what you are doing about it.
+            </p>
+
+            <button onclick="showAnswer('answer3')">
+                View Answer
+            </button>
+
+            <p id="answer3" style="display:none;">
+                Example: Sometimes I spend extra time making sure
+                my work is correct. I am improving this by setting
+                time limits and prioritizing important tasks.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>4. Why should we hire you?</h3>
+
+            <p>
+                Explain the skills and attitude you can bring to
+                the organization.
+            </p>
+
+            <button onclick="showAnswer('answer4')">
+                View Answer
+            </button>
+
+            <p id="answer4" style="display:none;">
+                Example: I am willing to learn, adapt to new
+                technologies and contribute to the team. I am
+                also committed to improving my technical skills.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>5. Where do you see yourself in 5 years?</h3>
+
+            <p>
+                Talk about your professional growth and learning
+                goals.
+            </p>
+
+            <button onclick="showAnswer('answer5')">
+                View Answer
+            </button>
+
+            <p id="answer5" style="display:none;">
+                Example: In five years, I would like to be an
+                experienced software professional with strong
+                technical skills and the ability to take
+                responsibility for important projects.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>6. Why do you want to join our company?</h3>
+
+            <p>
+                Connect your interests and career goals with the
+                company and role.
+            </p>
+
+            <button onclick="showAnswer('answer6')">
+                View Answer
+            </button>
+
+            <p id="answer6" style="display:none;">
+                Example: I am interested in this opportunity because
+                it provides a chance to learn, work on real projects
+                and develop my skills in a professional environment.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    <p>© 2026 InterviewPrep | Interview Preparation Website</p>
+</footer>
+
+<script>
+
+function showAnswer(answerId) {
+
+    const answer = document.getElementById(answerId);
+
+    if (answer.style.display === "none") {
+        answer.style.display = "block";
+    } else {
+        answer.style.display = "none";
+    }
+}
+
+</script>
+
+</body>
+</html>
